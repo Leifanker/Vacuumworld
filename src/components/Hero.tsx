@@ -106,7 +106,7 @@ const Hero: React.FC = () => {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="https://images.pexels.com/photos/4792080/pexels-photo-4792080.jpeg?auto=compress&cs=tinysrgb&w=600"
+                src="https://img.getimg.ai/generated/ca18b681-c5ce-4ca2-b8b7-706d7532f7f0/img-z6dlx8GFtct4m8VGR1TjQ.jpeg"
                 alt="Professional vacuum packaging setup"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
