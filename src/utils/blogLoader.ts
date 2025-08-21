@@ -8,9 +8,6 @@ const blogFiles = [
   'foodsaver-v4840-vs-nesco-vs12-comparison',
   'vacuum-seal-clothes-space-savings',
   'vacuum-sealing-meal-prep-save-time-money'
-  'foodsaver-v4840-vs-nesco-vs12-comparison',
-  'vacuum-seal-clothes-space-savings',
-  'vacuum-sealing-meal-prep-save-time-money'
 ];
 
 // Simulated markdown parser - in a real implementation, you'd use a proper markdown parser
