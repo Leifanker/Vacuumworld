@@ -8,9 +8,8 @@ import About from './components/About';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AffiliatePostRoute from "./routes/AffiliatePostRoute";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AffiliateIndexRoute from "@/routes/AffiliateIndexRoute";
-import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -93,21 +92,3 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-
-  export default function App() {
-  return (
-    <BrowserRouter>
-      <div style={{ padding: 12, borderBottom: "1px solid #eee" }}>
-        <Link to="/">Home</Link> | <Link to="/posts">Affiliate posts</Link>
-      </div>
-      <Routes>
-        <Route path="/posts" element={<AffiliateIndexRoute />} />
-        <Route path="/posts/:slug" element={<AffiliatePostRoute />} />
-        <Route path="*" element={<div style={{ padding: 24 }}>Not found</div>} />
-      </Routes>
-    </BrowserRouter>
-  );
-
-}
-
-export default App;
