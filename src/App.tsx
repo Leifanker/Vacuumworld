@@ -7,7 +7,7 @@ import BlogSection from './components/BlogSection';
 import About from './components/About';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
-import AffiliatePostRoute from "./routes/AffiliatePostRoute";
+import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
 import AffiliateIndexRoute from "@/routes/AffiliateIndexRoute";
 
 function App() {
