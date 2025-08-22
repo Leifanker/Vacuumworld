@@ -9,7 +9,6 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AffiliatePostRoute from "./routes/AffiliatePostRoute";
 import AffiliateIndexRoute from "@/routes/AffiliateIndexRoute";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
