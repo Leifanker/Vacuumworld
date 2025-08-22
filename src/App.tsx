@@ -73,7 +73,6 @@ function App() {
   );
 }
 
-export default App;
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
 // import your existing pages/components here
