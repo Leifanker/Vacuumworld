@@ -74,3 +74,25 @@ function App() {
 }
 
 export default App;
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
+// import your existing pages/components here
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      {/* Simple header (optional) */}
+      <div style={{ padding: 12, borderBottom: "1px solid #eee" }}>
+        <Link to="/">Home</Link>{" "}
+        | <Link to="/posts/best-vacuum-sealers-2025">Sample Affiliate Post</Link>
+      </div>
+
+      <Routes>
+        {/* your existing routes... */}
+        <Route path="/posts/:slug" element={<AffiliatePostRoute />} />
+        {/* fallback */}
+        <Route path="*" element={<div style={{ padding: 24 }}>Not found</div>} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
