@@ -1,29 +1,33 @@
 // src/utils/affiliateLoader.ts
 export type AffiliateData = Record<string, any>;
 
-// Import every JSON under /content/posts at build time
-// Absolute path from project root works in Vite.
-const modules = import.meta.glob('/content/posts/*.json', {
-  eager: true,
-  import: 'default', // give us the default export directly
-});
+// Try multiple glob roots to be safe across setups
+const a = import.meta.glob('../../content/posts/*.json', { eager: true, import: 'default' });
+const b = import.meta.glob('/content/posts/*.json', { eager: true, import: 'default' });
+const c = import.meta.glob('/**/content/posts/*.json', { eager: true, import: 'default' });
 
-// Build an in-memory index: [{ slug, data }]
+// Merge all matches
+const modules: Record<string, unknown> = { ...a, ...b, ...c };
+
 type Entry = { slug: string; data: AffiliateData };
 const index: Entry[] = Object.entries(modules).map(([path, data]) => {
-  const slug = path.split('/').pop()!.replace('.json', '');
+  const file = path.split('/').pop()!;           // e.g. best-vacuum-sealers-2025.json
+  const slug = file.replace(/\.json$/i, '');     // e.g. best-vacuum-sealers-2025
   return { slug, data: data as AffiliateData };
 });
 
-// ---- named exports (this is what your route imports) ----
 export function getAffiliateSlugs(): string[] {
-  return index.map((x) => x.slug);
+  return index.map(x => x.slug);
 }
-
 export function getAffiliateBySlug(slug: string): AffiliateData | undefined {
-  return index.find((x) => x.slug === slug)?.data;
+  return index.find(x => x.slug === slug)?.data;
 }
-
 export function getAffiliateIndex(): Entry[] {
   return index;
+}
+
+// (optional) quick debug:
+if (typeof window !== 'undefined') {
+  // eslint-disable-next-line no-console
+  console.log('[AffiliateLoader] slugs:', getAffiliateSlugs());
 }
