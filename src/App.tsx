@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
@@ -6,6 +7,7 @@ import BlogSection from './components/BlogSection';
 import About from './components/About';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import AffiliatePostRoute from "./routes/AffiliatePostRoute";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -51,7 +53,7 @@ function App() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  return (
+  const HomePage = () => (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Header 
         isDark={isDark} 
@@ -71,14 +73,7 @@ function App() {
       <Footer />
     </div>
   );
-}
 
-export default App;
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
-// import your existing pages/components here
-
-export default function App() {
   return (
     <BrowserRouter>
       {/* Simple header (optional) */}
@@ -88,7 +83,7 @@ export default function App() {
       </div>
 
       <Routes>
-        {/* your existing routes... */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/posts/:slug" element={<AffiliatePostRoute />} />
         {/* fallback */}
         <Route path="*" element={<div style={{ padding: 24 }}>Not found</div>} />
@@ -96,3 +91,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+export default App;
