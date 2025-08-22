@@ -33,3 +33,33 @@ export async function fetchAffiliateIndex(): Promise<string[]> {
 export async function fetchAffiliateBySlug(slug: string): Promise<AffiliateData | undefined> {
   return fetchJson(`${BASE}/${slug}.json`);
 }
+
+// Cache for affiliate index data
+let affiliateIndexCache: Array<{ slug: string; data: AffiliateData }> = [];
+let isIndexLoaded = false;
+
+// Load affiliate index data
+async function loadAffiliateIndex() {
+  if (isIndexLoaded) return;
+  
+  try {
+    const slugs = await fetchAffiliateIndex();
+    const dataPromises = slugs.map(async (slug) => {
+      const data = await fetchAffiliateBySlug(slug);
+      return { slug, data: data || {} };
+    });
+    
+    affiliateIndexCache = await Promise.all(dataPromises);
+    isIndexLoaded = true;
+  } catch (error) {
+    console.error('[affposts] Failed to load affiliate index:', error);
+    affiliateIndexCache = [];
+  }
+}
+
+// Initialize the cache when the module loads
+loadAffiliateIndex();
+
+export function getAffiliateIndex(): Array<{ slug: string; data: AffiliateData }> {
+  return affiliateIndexCache;
+}
