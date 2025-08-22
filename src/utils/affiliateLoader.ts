@@ -1,22 +1,35 @@
-// src/utils/affiliateLoader.ts
 export type AffiliateData = Record<string, any>;
+const BASE = "/affposts";
 
-const a = import.meta.glob('../../content/posts/*.json', { eager: true, import: 'default' });
-const b = import.meta.glob('/content/posts/*.json', { eager: true, import: 'default' });
-const c = import.meta.glob('/**/content/posts/*.json', { eager: true, import: 'default' });
+async function fetchJson(url: string) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 8000); // 8s timeout
+  try {
+    const res = await fetch(url, { cache: "no-store", signal: ctrl.signal });
+    const text = await res.text(); // read once for better error visibility
+    if (!res.ok) {
+      console.error("[affposts] HTTP", res.status, url, text.slice(0, 120));
+      return undefined;
+    }
+    const ct = res.headers.get("content-type") || "";
+    if (!ct.includes("application/json")) {
+      console.error("[affposts] Expected JSON, got", ct, "from", url, "body head:", text.slice(0, 120));
+      try { return JSON.parse(text); } catch { return undefined; }
+    }
+    return JSON.parse(text);
+  } catch (e) {
+    console.error("[affposts] fetch error", url, e);
+    return undefined;
+  } finally {
+    clearTimeout(t);
+  }
+}
 
-const modules: Record<string, unknown> = { ...a, ...b, ...c };
+export async function fetchAffiliateIndex(): Promise<string[]> {
+  const json = await fetchJson(`${BASE}/index.json`);
+  return json && Array.isArray(json.slugs) ? json.slugs : [];
+}
 
-type Entry = { slug: string; data: AffiliateData };
-const index: Entry[] = Object.entries(modules).map(([path, data]) => {
-  const file = path.split('/').pop()!;
-  const slug = file.replace(/\.json$/i, '');
-  return { slug, data: data as AffiliateData };
-});
-
-export function getAffiliateSlugs(): string[] { return index.map(x => x.slug); }
-export function getAffiliateBySlug(slug: string): AffiliateData | undefined { return index.find(x => x.slug === slug)?.data; }
-export function getAffiliateIndex(): Entry[] { return index; }
-
-// Debug in browser console
-if (typeof window !== 'undefined') console.log('[AffiliateLoader] slugs:', getAffiliateSlugs());
+export async function fetchAffiliateBySlug(slug: string): Promise<AffiliateData | undefined> {
+  return fetchJson(`${BASE}/${slug}.json`);
+}
