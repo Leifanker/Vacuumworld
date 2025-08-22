@@ -1,0 +1,34 @@
+{ 
+  "settings": { 
+    "language": "en", 
+    "locale": "en-US", 
+    "brand_voice": "friendly, practical, food-safety–savvy", 
+    "tone": "conversational, helpful, no-jargon", 
+    "reading_level": "Grade 7", 
+    "date_context": "August 2025", 
+    "niche": "Vacuum Packaging", 
+    "audience_persona": "busy home cooks, hunters, and meal-prep families who buy meat in bulk" 
+  }, 
+  "goals": { 
+    "primary_goal": "Help readers choose a vacuum sealer for meat and confidently use it to avoid freezer burn and save money.", 
+    "secondary_goals": ["Provide quick top picks with clear value props", "Answer common food-safety and storage questions"] 
+  }, 
+  "seo": { 
+    "primary_keyword": "vacuum sealing meat", 
+    "secondary_keywords": ["how to vacuum seal meat", "best vacuum sealer for meat", "how long does vacuum sealed meat last"], 
+    "semantic_terms": ["freezer burn", "sous vide"], 
+    "people_also_ask_questions": ["How long does vacuum sealed meat last in the freezer?", "Do you need to freeze meat before vacuum sealing?", "Can you vacuum seal meat with marinade?"], 
+    "url_slug_template": "vacuum-sealing-meat-guide", 
+    "meta_title_template": "Vacuum Sealing Meat: How-To + Best Picks (2025)", 
+    "meta_description_template": "Learn how to vacuum seal meat the right way and see the best sealers for home cooks and hunters. Prevent freezer burn and save money.", 
+    "og_title_template": "Vacuum Sealing Meat: Save Flavor, Save Money", 
+    "og_description_template": "Step-by-step tips plus top-rated vacuum sealers for meat in 2025.", 
+    "og_image_url": "https://example.com/images/og/vacuum-sealing-meat.jpg" 
+  }, 
+  "compliance": { 
+    "affiliate_disclosure_text": "This post contains affiliate links. If you buy through our links, we may earn a commission at no extra cost to you.", 
+    "disclosure_location": "under-title", 
+    "pricing_disclaimer_text": "Pricing and availability change frequently. Check the retailer's page for the latest.", 
+    "safety_notice_text": "Always follow food-safety guidance: keep raw meat at or below 40°F (4°C), thaw in the refrigerator, and sanitize surfaces. Do not reuse bags that touched raw meat." 
+  }
+}
