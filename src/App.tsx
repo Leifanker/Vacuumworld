@@ -77,16 +77,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Simple header (optional) */}
       <div style={{ padding: 12, borderBottom: "1px solid #eee" }}>
-        <Link to="/">Home</Link>{" "}
-        | <Link to="/home/project/src/content/posts/Best vacumes for meat.json">Sample Affiliate Post</Link>
+        <Link to="/">Home</Link> | <Link to="/posts">Affiliate posts</Link>
       </div>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/posts" element={<AffiliateIndexRoute />} />
         <Route path="/posts/:slug" element={<AffiliatePostRoute />} />
-        {/* fallback */}
         <Route path="*" element={<div style={{ padding: 24 }}>Not found</div>} />
       </Routes>
     </BrowserRouter>
