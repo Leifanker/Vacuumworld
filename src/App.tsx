@@ -92,3 +92,4 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+}
