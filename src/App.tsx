@@ -79,7 +79,7 @@ function App() {
       {/* Simple header (optional) */}
       <div style={{ padding: 12, borderBottom: "1px solid #eee" }}>
         <Link to="/">Home</Link>{" "}
-        | <Link to="/posts/best-vacuum-sealers-2025">Sample Affiliate Post</Link>
+        | <Link to="/home/project/src/content/posts/Best vacumes for meat.json">Sample Affiliate Post</Link>
       </div>
 
       <Routes>
