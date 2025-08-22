@@ -13,7 +13,7 @@ export default function AffiliateIndexRoute() {
           </li>
         ))}
       </ul>
-      {!items.length && <p>No JSON posts were loaded. Check the folder and glob.</p>}
+      {!items.length && <p>No JSON posts were loaded. Check the folder and filename.</p>}
     </div>
   );
 }
