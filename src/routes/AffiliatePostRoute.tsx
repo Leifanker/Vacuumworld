@@ -1,4 +1,3 @@
-// src/routes/AffiliatePostRoute.tsx
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AffiliatePost from "@/components/AffiliatePost";
@@ -7,11 +6,11 @@ import { fetchAffiliateBySlug } from "@/utils/affiliateLoader";
 export default function AffiliatePostRoute() {
   const { slug } = useParams();
   const [data, setData] = useState<any | null>(null);
-  const [status, setStatus] = useState<"loading"|"error"|"ok">("loading");
+  const [status, setStatus] = useState<"loading" | "error" | "ok">("loading");
 
   useEffect(() => {
+    if (!slug) return setStatus("error");
     (async () => {
-      if (!slug) return setStatus("error");
       const d = await fetchAffiliateBySlug(slug);
       if (!d) return setStatus("error");
       setData(d);
