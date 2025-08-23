@@ -1,14 +1,68 @@
 {
-  "seo": { "meta_title_template": "Sample Affiliate Post", "meta_description_template": "Demo." },
+  "seo": {
+    "meta_title_template": "Best Vacuum Sealers 2025 (Home Use)",
+    "meta_description_template": "Cut food waste and prep faster. See our top vacuum sealer pick + buyer’s guide."
+  },
   "settings": { "niche": "Vacuum Packaging", "audience_persona": "everyday home cook" },
-  "ux": { "enable_jump_links": true, "use_comparison_table": false, "lazy_load_images": true, "button_label_default": "Check price" },
+  "ux": { "enable_jump_links": true, "use_comparison_table": true, "lazy_load_images": true, "button_label_default": "Check price" },
   "compliance": { "affiliate_disclosure_text": "Disclosure: affiliate links.", "pricing_disclaimer_text": "Prices change." },
-  "quick_picks": [],
-  "products": [],
-  "comparison_table": { "enabled": false },
-  "sections": [
-    { "id": "intro", "title_template": "Keep Food Fresh", "word_count_target": 80, "include_disclosure": true },
-    { "id": "conclusion", "title_template": "Verdict", "word_count_target": 40, "final_cta": { "text": "See price", "target_product_id": "" } }
+
+  "quick_picks": [
+    { "label": "Best Overall", "product_id": "p1", "cta_text": "See on Amazon" }
   ],
-  "schema_settings": { "enable_faq_schema": false, "enable_product_schema": false }
+
+  "products": [
+    {
+      "id": "p1",
+      "name": "FoodSaver V4840",
+      "affiliate_url": "https://www.amazon.com/dp/XXXX/?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200",
+      "price_display": "199.99",
+      "currency": "USD",
+      "summary_value_prop": "Versatile 2-in-1 sealer with strong seals and built-in cutter.",
+      "key_specs": ["Dry/Moist modes", "Built-in cutter", "Handheld hose"],
+      "pros": ["Hands-free sealing", "Reliable seals", "Good accessories"],
+      "cons": ["Bulky", "Loud on max"],
+      "best_for_tags": ["Families", "Bulk shoppers"],
+      "rating": "4.7",
+      "review_count": "1200",
+      "rating_source": "Retailer",
+      "deal_badge": "-15% Today",
+      "coupon_text": "Clip coupon at checkout"
+    }
+  ],
+
+  "comparison_table": {
+    "enabled": true,
+    "columns": [
+      { "header": "Model", "field": "name" },
+      { "header": "Price", "field": "price_display" },
+      { "header": "Key feature", "field": "key_specs[0]" },
+      { "header": "Best for", "field": "best_for_tags[0]" },
+      { "header": "Rating", "field": "rating" }
+    ]
+  },
+
+  "sections": [
+    { "id": "intro", "title_template": "Keep Food Fresh: Vacuum Packaging", "word_count_target": 80, "include_disclosure": true },
+
+    {
+      "id": "faqs",
+      "title_template": "FAQs",
+      "schema": "FAQPage",
+      "items": [
+        { "q": "Can I vacuum seal liquids?", "a_template": "Pre-freeze soups or use a chamber sealer." },
+        { "q": "Do I still need to refrigerate?", "a_template": "Yes—vacuum sealing extends freshness but isn't a substitute." }
+      ]
+    },
+
+    {
+      "id": "conclusion",
+      "title_template": "Verdict",
+      "word_count_target": 60,
+      "final_cta": { "text": "See today’s best price", "target_product_id": "p1" }
+    }
+  ],
+
+  "schema_settings": { "enable_faq_schema": true, "enable_product_schema": true }
 }
