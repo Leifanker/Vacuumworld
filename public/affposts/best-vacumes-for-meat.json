@@ -1,34 +1,170 @@
-{ 
-  "settings": { 
-    "language": "en", 
-    "locale": "en-US", 
-    "brand_voice": "friendly, practical, food-safety–savvy", 
-    "tone": "conversational, helpful, no-jargon", 
-    "reading_level": "Grade 7", 
-    "date_context": "August 2025", 
-    "niche": "Vacuum Packaging", 
-    "audience_persona": "busy home cooks, hunters, and meal-prep families who buy meat in bulk" 
-  }, 
-  "goals": { 
-    "primary_goal": "Help readers choose a vacuum sealer for meat and confidently use it to avoid freezer burn and save money.", 
-    "secondary_goals": ["Provide quick top picks with clear value props", "Answer common food-safety and storage questions"] 
-  }, 
-  "seo": { 
-    "primary_keyword": "vacuum sealing meat", 
-    "secondary_keywords": ["how to vacuum seal meat", "best vacuum sealer for meat", "how long does vacuum sealed meat last"], 
-    "semantic_terms": ["freezer burn", "sous vide"], 
-    "people_also_ask_questions": ["How long does vacuum sealed meat last in the freezer?", "Do you need to freeze meat before vacuum sealing?", "Can you vacuum seal meat with marinade?"], 
-    "url_slug_template": "vacuum-sealing-meat-guide", 
-    "meta_title_template": "Vacuum Sealing Meat: How-To + Best Picks (2025)", 
-    "meta_description_template": "Learn how to vacuum seal meat the right way and see the best sealers for home cooks and hunters. Prevent freezer burn and save money.", 
-    "og_title_template": "Vacuum Sealing Meat: Save Flavor, Save Money", 
-    "og_description_template": "Step-by-step tips plus top-rated vacuum sealers for meat in 2025.", 
-    "og_image_url": "https://example.com/images/og/vacuum-sealing-meat.jpg" 
-  }, 
-  "compliance": { 
-    "affiliate_disclosure_text": "This post contains affiliate links. If you buy through our links, we may earn a commission at no extra cost to you.", 
-    "disclosure_location": "under-title", 
-    "pricing_disclaimer_text": "Pricing and availability change frequently. Check the retailer's page for the latest.", 
-    "safety_notice_text": "Always follow food-safety guidance: keep raw meat at or below 40°F (4°C), thaw in the refrigerator, and sanitize surfaces. Do not reuse bags that touched raw meat." 
+{
+  "settings": {
+    "language": "en",
+    "locale": "en-US",
+    "brand_voice": "friendly, practical, food-safety–savvy",
+    "tone": "conversational, helpful, no-jargon",
+    "reading_level": "Grade 7",
+    "date_context": "August 2025",
+    "niche": "Vacuum Packaging",
+    "audience_persona": "busy home cooks, hunters, and meal-prep families who buy meat in bulk"
+  },
+  "goals": {
+    "primary_goal": "Help readers choose a vacuum sealer for meat and confidently use it to avoid freezer burn and save money.",
+    "secondary_goals": [
+      "Provide quick top picks with clear value props",
+      "Answer common food-safety and storage questions"
+    ]
+  },
+  "seo": {
+    "primary_keyword": "vacuum sealing meat",
+    "secondary_keywords": ["how to vacuum seal meat", "best vacuum sealer for meat", "how long does vacuum sealed meat last"],
+    "semantic_terms": ["freezer burn", "sous vide"],
+    "people_also_ask_questions": [
+      "How long does vacuum sealed meat last in the freezer?",
+      "Do you need to freeze meat before vacuum sealing?",
+      "Can you vacuum seal meat with marinade?"
+    ],
+    "url_slug_template": "vacuum-sealing-meat-guide",
+    "meta_title_template": "Vacuum Sealing Meat: How-To + Best Picks (2025)",
+    "meta_description_template": "Learn how to vacuum seal meat the right way and see the best sealers for home cooks and hunters. Prevent freezer burn and save money.",
+    "og_title_template": "Vacuum Sealing Meat: Save Flavor, Save Money",
+    "og_description_template": "Step-by-step tips plus top-rated vacuum sealers for meat in 2025.",
+    "og_image_url": "https://images.unsplash.com/photo-1543353071-10c8ba85a904?w=1200&q=80"
+  },
+  "compliance": {
+    "affiliate_disclosure_text": "This post contains affiliate links. If you buy through our links, we may earn a commission at no extra cost to you.",
+    "disclosure_location": "under-title",
+    "pricing_disclaimer_text": "Pricing and availability change frequently. Check the retailer's page for the latest.",
+    "safety_notice_text": "Always follow food-safety guidance: keep raw meat at or below 40°F (4°C), thaw in the refrigerator, and sanitize surfaces. Do not reuse bags that touched raw meat."
+  },
+  "ux": {
+    "enable_jump_links": true,
+    "use_comparison_table": false,
+    "lazy_load_images": true,
+    "button_label_default": "Check price"
+  },
+  "quick_picks": [
+    { "label": "Best Overall", "product_id": "p1", "cta_text": "See on Amazon" },
+    { "label": "Best Budget", "product_id": "p2", "cta_text": "Check price" },
+    { "label": "Best for Hunters", "product_id": "p4", "cta_text": "See price" }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "FoodSaver V4840 (2-in-1)",
+      "affiliate_url": "https://www.amazon.com/dp/XXXXXXXX?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200&q=80",
+      "price_display": "199.99",
+      "currency": "USD",
+      "summary_value_prop": "Easy, reliable seals for family packs of meat with built-in cutter and moist mode.",
+      "key_specs": ["Dry/Moist modes", "Built-in bag cutter", "Handheld accessory port"],
+      "pros": ["Consistent seals on steaks and roasts", "Hands-free operation", "Good starter accessories"],
+      "cons": ["Bulky footprint", "Louder on strong suction"],
+      "best_for_tags": ["Most households", "Bulk meat buyers"],
+      "rating": "4.7",
+      "review_count": "1200",
+      "rating_source": "Retailer",
+      "deal_badge": "-15% Today",
+      "coupon_text": "Clip coupon at checkout"
+    },
+    {
+      "id": "p2",
+      "name": "Geryon E2900 (Budget Compact)",
+      "affiliate_url": "https://www.amazon.com/dp/YYYYYYYY?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1514516884753-dfdbd9d5d0b0?w=1200&q=80",
+      "price_display": "49.99",
+      "currency": "USD",
+      "summary_value_prop": "Low-cost, space-saving sealer that nails the basics for occasional batches.",
+      "key_specs": ["Two sealing modes", "Slim design", "Starter bags included"],
+      "pros": ["Cheap and simple", "Lightweight", "Good for apartments"],
+      "cons": ["Needs cooldown on long runs", "Moderate suction"],
+      "best_for_tags": ["Occasional users", "Small kitchens"],
+      "rating": "4.4",
+      "review_count": "860",
+      "rating_source": "Retailer"
+    },
+    {
+      "id": "p3",
+      "name": "Anova Precision Sealer",
+      "affiliate_url": "https://www.amazon.com/dp/ZZZZZZZZ?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
+      "price_display": "79.00",
+      "currency": "USD",
+      "summary_value_prop": "Slim sealer that’s perfect for portioning cuts for sous-vide or weekly meal prep.",
+      "key_specs": ["Fast cycle", "12\" bags", "Compact body"],
+      "pros": ["Quick, consistent seals", "Small footprint"],
+      "cons": ["No built-in cutter", "Basic feature set"],
+      "best_for_tags": ["Sous-vide fans", "Meal prep"],
+      "rating": "4.5",
+      "review_count": "930",
+      "rating_source": "Retailer"
+    },
+    {
+      "id": "p4",
+      "name": "Weston Pro (Heavy-Duty Option)",
+      "affiliate_url": "https://www.amazon.com/dp/AAAAAAAA?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80",
+      "price_display": "399.00",
+      "currency": "USD",
+      "summary_value_prop": "Rugged, wide-seal machine built for game processing and big meat hauls.",
+      "key_specs": ["Extra-wide seal bar", "Manual pulse mode", "Heavy-duty housing"],
+      "pros": ["Great for large cuts", "Tough build", "Wide seals resist leaks"],
+      "cons": ["Large and heavy", "Overkill for light users"],
+      "best_for_tags": ["Hunters", "Bulk processors"],
+      "rating": "4.6",
+      "review_count": "540",
+      "rating_source": "Retailer"
+    },
+    {
+      "id": "p5",
+      "name": "Nesco VS-12",
+      "affiliate_url": "https://www.amazon.com/dp/BBBBBBBB?tag=vacuumworld-20",
+      "image_url": "https://images.unsplash.com/photo-1586201375761-83865001e31b?w=1200&q=80",
+      "price_display": "129.99",
+      "currency": "USD",
+      "summary_value_prop": "Great value pick with pulse/gentle options for soft cuts and burgers.",
+      "key_specs": ["Dry/Moist/Gentle", "Built-in roll storage & cutter", "Double seal option"],
+      "pros": ["Feature-rich for the price", "Nice control over delicate items"],
+      "cons": ["Takes counter space", "Roll storage is tight"],
+      "best_for_tags": ["Value hunters", "Varied cuts"],
+      "rating": "4.6",
+      "review_count": "2100",
+      "rating_source": "Retailer"
+    }
+  ],
+  "comparison_table": { "enabled": false },
+  "sections": [
+    {
+      "id": "intro",
+      "title_template": "Vacuum Sealing Meat: The Easy Way to Beat Freezer Burn",
+      "word_count_target": 120,
+      "include_disclosure": true
+    },
+    {
+      "id": "how_to_tips",
+      "title_template": "Quick Tips for Meat Sealing Success",
+      "word_count_target": 180
+    },
+    {
+      "id": "faqs",
+      "title_template": "FAQs",
+      "schema": "FAQPage",
+      "items": [
+        { "q": "How long does vacuum sealed meat last in the freezer?", "a_template": "Well-sealed and kept at 0°F/-18°C or below, most cuts last 1–3 years with quality intact. Always follow safe food storage guidelines." },
+        { "q": "Do you need to pre-freeze meat before vacuum sealing?", "a_template": "Not required for whole cuts, but a 30–60 minute chill firms soft pieces and helps avoid juice in the seal area." },
+        { "q": "Can you vacuum seal meat with marinade?", "a_template": "Yes—pre-chill to thicken the marinade, or freeze for 30 minutes first. Use 'Moist' or 'Gentle/Pulse' mode to avoid drawing liquid into the seal." }
+      ]
+    },
+    {
+      "id": "conclusion",
+      "title_template": "Verdict",
+      "word_count_target": 60,
+      "final_cta": { "text": "See today’s best price", "target_product_id": "p1" }
+    }
+  ],
+  "schema_settings": {
+    "enable_faq_schema": false,
+    "enable_product_schema": false
   }
 }
