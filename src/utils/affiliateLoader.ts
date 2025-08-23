@@ -1,4 +1,3 @@
-// src/utils/affiliateLoader.ts
 export type AffiliateData = Record<string, any>;
 const BASE = "/affposts";
 
@@ -10,7 +9,7 @@ function cacheBust(url: string) {
 
 async function fetchJson(url: string) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 8000); // 8s timeout
+  const t = setTimeout(() => ctrl.abort(), 8000);
   try {
     const res = await fetch(cacheBust(url), { cache: "no-store", signal: ctrl.signal });
     const text = await res.text();
@@ -35,11 +34,10 @@ async function fetchJson(url: string) {
 export async function fetchAffiliateIndex(): Promise<string[]> {
   const json = await fetchJson(`${BASE}/index.json`);
   if (!json) return [];
-  // Accept multiple shapes: ["slug", ...] or { slugs: [...] } or { posts: [{slug}] }
   if (Array.isArray(json)) return json.filter(Boolean);
   if (Array.isArray(json.slugs)) return json.slugs.filter(Boolean);
   if (Array.isArray(json.posts)) return json.posts.map((p: any) => p?.slug).filter(Boolean);
-  console.warn("[affposts] index.json had unexpected shape:", json);
+  console.warn("[affposts] index.json unexpected shape:", json);
   return [];
 }
 
