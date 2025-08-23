@@ -1,41 +1,14 @@
 {
-  "seo": {
-    "meta_title_template": "Sample Affiliate Post",
-    "meta_description_template": "Demo."
-  },
-  "settings": {
-    "niche": "Vacuum Packaging",
-    "audience_persona": "everyday home cook"
-  },
-  "ux": {
-    "enable_jump_links": true,
-    "use_comparison_table": false,
-    "lazy_load_images": true,
-    "button_label_default": "Check price"
-  },
-  "compliance": {
-    "affiliate_disclosure_text": "Disclosure: affiliate links.",
-    "pricing_disclaimer_text": "Prices change."
-  },
+  "seo": { "meta_title_template": "Sample Affiliate Post", "meta_description_template": "Demo." },
+  "settings": { "niche": "Vacuum Packaging", "audience_persona": "everyday home cook" },
+  "ux": { "enable_jump_links": true, "use_comparison_table": false, "lazy_load_images": true, "button_label_default": "Check price" },
+  "compliance": { "affiliate_disclosure_text": "Disclosure: affiliate links.", "pricing_disclaimer_text": "Prices change." },
   "quick_picks": [],
   "products": [],
   "comparison_table": { "enabled": false },
   "sections": [
-    {
-      "id": "intro",
-      "title_template": "Keep Food Fresh",
-      "word_count_target": 80,
-      "include_disclosure": true
-    },
-    {
-      "id": "conclusion",
-      "title_template": "Verdict",
-      "word_count_target": 40,
-      "final_cta": { "text": "See price", "target_product_id": "" }
-    }
+    { "id": "intro", "title_template": "Keep Food Fresh", "word_count_target": 80, "include_disclosure": true },
+    { "id": "conclusion", "title_template": "Verdict", "word_count_target": 40, "final_cta": { "text": "See price", "target_product_id": "" } }
   ],
-  "schema_settings": {
-    "enable_faq_schema": false,
-    "enable_product_schema": false
-  }
+  "schema_settings": { "enable_faq_schema": false, "enable_product_schema": false }
 }
