@@ -1,9 +1,9 @@
 // e.g. src/components/AffiliateList.tsx
 import { Link } from "react-router-dom";
-import { getAffiliateIndex } from "@/utils/affiliateLoader";
+import { fetchAffiliateIndex } from "@/utils/affiliateLoader";
 
 export default function AffiliateList() {
-  const items = getAffiliateIndex();
+  const items = fetchAffiliateIndex();
   return (
     <ul>
       {items.map(({ slug, data }) => (
