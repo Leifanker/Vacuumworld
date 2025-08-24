@@ -8,6 +8,35 @@ const Section = ({ id, title, children }: any) => (
   </section>
 );
 
+// inside AffiliatePost component:
+const heroImg = data?.seo?.og_image_url || data?.products?.[0]?.image_url;
+
+<header className="relative">
+  <div className="h-44 md:h-64 w-full relative overflow-hidden">
+    {heroImg ? (
+      <>
+        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/60 to-violet-600/60" />
+      </>
+    ) : (
+      <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 to-violet-600" />
+    )}
+  </div>
+  <div className="max-w-5xl mx-auto px-4 md:px-6 -mt-12 md:-mt-16 relative">
+    <div className="rounded-3xl border border-violet-200/60 bg-white shadow-md p-5 md:p-7">
+      <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+        {seo?.meta_title_template || "Affiliate Post"}
+      </h1>
+      {seo?.meta_description_template && <p className="text-slate-600 mt-1">{seo.meta_description_template}</p>}
+      {compliance?.affiliate_disclosure_text && (
+        <div className="mt-3 text-xs text-slate-700 bg-amber-50 border border-amber-200 rounded-2xl p-2.5">
+          {compliance.affiliate_disclosure_text}
+        </div>
+      )}
+    </div>
+  </div>
+</header>
+
 const Badge = ({ children }: any) => (
   <span className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-gray-100 border border-gray-200">{children}</span>
 );
