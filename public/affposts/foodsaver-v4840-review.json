@@ -18,7 +18,7 @@
     "meta_description_template": "Hands-on review with real pros/cons, quick verdict, who it’s for, and how it compares. See price, warranty, and best alternatives.",
     "og_title_template": "FoodSaver V4840 Review (2025): Still a Top Pick?",
     "og_description_template": "We tested the V4840 on bulk meat packs and weeknight meal prep. Here’s what to know.",
-    "og_image_url": "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200&q=80"
+    "og_image_url": "https://m.media-amazon.com/images/I/71paHhyHJhL._AC_SL1500_.jpg"
   },
   "compliance": {
     "affiliate_disclosure_text": "This review contains affiliate links. If you buy through our links, we may earn a commission at no extra cost to you.",
@@ -35,12 +35,12 @@
     "id": "v4840",
     "name": "FoodSaver V4840 (2-in-1)",
     "brand": "FoodSaver",
-    "affiliate_url": "https://www.amazon.com/dp/XXXXXXXX?tag=vacuumworld-20",
+    "affiliate_url": "https://amzn.to/4p5QzPs",
     "msrp": "279.99",
     "price_display": "199.99",
     "currency": "USD",
     "images": [
-      "https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=1200&q=80"
+      "https://m.media-amazon.com/images/I/71paHhyHJhL._AC_SL1500_.jpg"
     ],
     "key_specs": ["Dry/Moist modes", "Built-in cutter", "Accessory hose", "Auto bag detection"],
     "warranty": "5-year limited",
