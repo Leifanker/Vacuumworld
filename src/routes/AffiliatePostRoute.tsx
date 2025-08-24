@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import AffiliatePost from "@/components/AffiliatePost";
 import { fetchAffiliateBySlug } from "@/utils/affiliateLoader";
+import ReviewPost from "@/components/ReviewPost";
 
 type Status = "loading" | "ok" | "error";
 
