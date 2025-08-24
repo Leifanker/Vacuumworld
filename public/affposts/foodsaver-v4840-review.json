@@ -55,7 +55,7 @@
       "Moist mode handles juicy meat packs"
     ],
     "price_snapshot": "199.99",
-    "primary_cta": { "text": "See price on Amazon", "url": "https://www.amazon.com/dp/XXXXXXXX?tag=vacuumworld-20" },
+    "primary_cta": { "text": "See price on Amazon", "url": "https://amzn.to/4p5QzPs" },
     "for_who": ["Families that buy meat in bulk", "Meal-prep and sous-vide users", "Anyone who wants simple, push-button sealing"],
     "not_for": ["Tiny kitchens with no counter space", "High-volume game processing (see Weston alternative)"]
   },
