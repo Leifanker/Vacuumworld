@@ -8,41 +8,18 @@ const Section = ({ id, title, children }: any) => (
   </section>
 );
 
-// inside AffiliatePost component:
-const heroImg = data?.seo?.og_image_url || data?.products?.[0]?.image_url;
-
-<header className="relative">
-  <div className="h-44 md:h-64 w-full relative overflow-hidden">
-    {heroImg ? (
-      <>
-        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/60 to-violet-600/60" />
-      </>
-    ) : (
-      <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 to-violet-600" />
-    )}
-  </div>
-  <div className="max-w-5xl mx-auto px-4 md:px-6 -mt-12 md:-mt-16 relative">
-    <div className="rounded-3xl border border-violet-200/60 bg-white shadow-md p-5 md:p-7">
-      <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-        {seo?.meta_title_template || "Affiliate Post"}
-      </h1>
-      {seo?.meta_description_template && <p className="text-slate-600 mt-1">{seo.meta_description_template}</p>}
-      {compliance?.affiliate_disclosure_text && (
-        <div className="mt-3 text-xs text-slate-700 bg-amber-50 border border-amber-200 rounded-2xl p-2.5">
-          {compliance.affiliate_disclosure_text}
-        </div>
-      )}
-    </div>
-  </div>
-</header>
-
 const Badge = ({ children }: any) => (
-  <span className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-gray-100 border border-gray-200">{children}</span>
+  <span className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-gray-100 border border-gray-200">
+    {children}
+  </span>
 );
+
 const Card = ({ children }: any) => (
-  <div className="rounded-2xl border border-gray-200 shadow-sm p-4 md:p-6 bg-white">{children}</div>
+  <div className="rounded-2xl border border-gray-200 shadow-sm p-4 md:p-6 bg-white">
+    {children}
+  </div>
 );
+
 const Button = ({ href, children }: any) => (
   <a
     href={href}
@@ -90,7 +67,7 @@ const ProductListJsonLd = ({ products }: { products: any[] }) => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: products.map((p, i) => ({
+    itemListElement: products.map((p: any, i: number) => ({
       "@type": "ListItem",
       position: i + 1,
       item: {
@@ -127,6 +104,7 @@ export default function AffiliatePost({ data = {} as any }) {
   if (!data || typeof data !== "object") {
     return <div style={{ padding: 24 }}>Invalid post data.</div>;
   }
+
   const { settings = {}, seo = {}, compliance = {}, ux = {}, comparison_table = {}, sections = [] } = data;
 
   const faqs = sections.find((s: any) => s.id === "faqs");
@@ -135,8 +113,7 @@ export default function AffiliatePost({ data = {} as any }) {
 
   // default how-to bullets if none provided
   const howToBullets: string[] =
-    (data as any).how_to_bullets ||
-    [
+    (data as any).how_to_bullets || [
       "Chill soft cuts 30–60 minutes before sealing to reduce juice near the seal.",
       "Use Moist or Gentle/Pulse mode for juicy or delicate items.",
       "Wipe the sealing edge dry; moisture causes weak seals.",
@@ -146,30 +123,48 @@ export default function AffiliatePost({ data = {} as any }) {
       "Sanitize surfaces and never reuse bags that touched raw meat.",
     ];
 
+  // ✅ HERO image is computed *inside* the component
+  const heroImg = seo?.og_image_url || data?.products?.[0]?.image_url;
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-5xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+    <div className="min-h-screen bg-gradient-to-b from-violet-50/40 to-white">
+      {/* HERO HEADER */}
+      <header className="relative">
+        <div className="h-44 md:h-64 w-full relative overflow-hidden">
+          {heroImg ? (
+            <>
+              <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/60 to-violet-600/60" />
+            </>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500 to-violet-600" />
+          )}
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4 md:px-6 -mt-12 md:-mt-16 relative">
+          <div className="rounded-3xl border border-violet-200/60 bg-white shadow-md p-5 md:p-7">
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               {seo?.meta_title_template || "Affiliate Post"}
             </h1>
-            <p className="text-sm text-gray-600">{seo?.meta_description_template}</p>
+            {seo?.meta_description_template && (
+              <p className="text-slate-600 mt-1">{seo.meta_description_template}</p>
+            )}
+            {compliance?.affiliate_disclosure_text && (
+              <div className="mt-3 text-xs text-slate-700 bg-amber-50 border border-amber-200 rounded-2xl p-2.5">
+                {compliance.affiliate_disclosure_text}
+              </div>
+            )}
           </div>
         </div>
       </header>
 
+      {/* BODY */}
       <main className="max-w-5xl mx-auto px-4 md:px-6 py-8">
-        {/* Disclosure */}
-        {compliance?.affiliate_disclosure_text && (
-          <div className="mb-6 text-xs text-gray-600 bg-amber-50 border border-amber-200 rounded-2xl p-3">
-            {compliance.affiliate_disclosure_text}
-          </div>
-        )}
-
         {/* Intro */}
-        <Section id="intro" title={`Keep Food Fresh: ${seo?.primary_keyword || settings?.niche || "Top Picks"}`}>
+        <Section
+          id="intro"
+          title={`Keep Food Fresh: ${seo?.primary_keyword || settings?.niche || "Top Picks"}`}
+        >
           <p>
             Quick recommendations, detailed reviews, and a simple buyer’s guide for{" "}
             {settings?.audience_persona || "everyday readers"}.
@@ -206,7 +201,9 @@ export default function AffiliatePost({ data = {} as any }) {
                         {p.deal_badge && <Badge>{p.deal_badge}</Badge>}
                         {p.price_display && <Badge>${p.price_display}</Badge>}
                       </div>
-                      <Button href={p.affiliate_url}>{qp.cta_text || ux?.button_label_default || "Check price"}</Button>
+                      <Button href={p.affiliate_url}>
+                        {qp.cta_text || ux?.button_label_default || "Check price"}
+                      </Button>
                     </div>
                   </Card>
                 );
@@ -228,15 +225,27 @@ export default function AffiliatePost({ data = {} as any }) {
                     <div className="grid sm:grid-cols-3 gap-4">
                       <div>
                         <div className="font-medium mb-1">Key specs</div>
-                        <ul className="text-sm list-disc pl-5">{(p.key_specs || []).map((s: any, i: number) => <li key={i}>{s}</li>)}</ul>
+                        <ul className="text-sm list-disc pl-5">
+                          {(p.key_specs || []).map((s: any, i: number) => (
+                            <li key={i}>{s}</li>
+                          ))}
+                        </ul>
                       </div>
                       <div>
                         <div className="font-medium mb-1">Pros</div>
-                        <ul className="text-sm list-disc pl-5">{(p.pros || []).map((s: any, i: number) => <li key={i}>{s}</li>)}</ul>
+                        <ul className="text-sm list-disc pl-5">
+                          {(p.pros || []).map((s: any, i: number) => (
+                            <li key={i}>{s}</li>
+                          ))}
+                        </ul>
                       </div>
                       <div>
                         <div className="font-medium mb-1">Cons</div>
-                        <ul className="text-sm list-disc pl-5">{(p.cons || []).map((s: any, i: number) => <li key={i}>{s}</li>)}</ul>
+                        <ul className="text-sm list-disc pl-5">
+                          {(p.cons || []).map((s: any, i: number) => (
+                            <li key={i}>{s}</li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-gray-600">
@@ -268,7 +277,9 @@ export default function AffiliatePost({ data = {} as any }) {
                 <thead className="bg-gray-100">
                   <tr>
                     {(comparison_table.columns || []).map((c: any, i: number) => (
-                      <th key={i} className="text-left px-4 py-3 font-medium">{c.header}</th>
+                      <th key={i} className="text-left px-4 py-3 font-medium">
+                        {c.header}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -276,7 +287,9 @@ export default function AffiliatePost({ data = {} as any }) {
                   {data.products.map((p: any) => (
                     <tr key={p.id} className="border-t bg-white">
                       {(comparison_table.columns || []).map((c: any, i: number) => (
-                        <td key={i} className="px-4 py-3">{String(readFieldPath(p, c.field) ?? "—")}</td>
+                        <td key={i} className="px-4 py-3">
+                          {String(readFieldPath(p, c.field) ?? "—")}
+                        </td>
                       ))}
                     </tr>
                   ))}
@@ -290,7 +303,9 @@ export default function AffiliatePost({ data = {} as any }) {
         {howTo && (
           <Section id="tips" title={howTo.title_template || "Tips"}>
             <ul className="list-disc pl-5">
-              {howToBullets.map((t, i) => <li key={i}>{t}</li>)}
+              {howToBullets.map((t, i) => (
+                <li key={i}>{t}</li>
+              ))}
             </ul>
           </Section>
         )}
@@ -318,7 +333,9 @@ export default function AffiliatePost({ data = {} as any }) {
             <Section id="conclusion" title={conclusion?.title_template || "Conclusion"}>
               {target ? (
                 <>
-                  <p>For most households, <strong>{target.name}</strong> is the easiest pick.</p>
+                  <p>
+                    For most households, <strong>{target.name}</strong> is the easiest pick.
+                  </p>
                   <div className="mt-3">
                     <Button href={target.affiliate_url}>
                       {conclusion?.final_cta?.text || ux?.button_label_default || "Check price"}
@@ -342,7 +359,9 @@ export default function AffiliatePost({ data = {} as any }) {
 
       {/* JSON-LD toggles */}
       {data.schema_settings?.enable_faq_schema && faqs?.items?.length ? <FaqJsonLd items={faqs.items} /> : null}
-      {data.schema_settings?.enable_product_schema && data.products?.length ? <ProductListJsonLd products={data.products} /> : null}
+      {data.schema_settings?.enable_product_schema && data.products?.length ? (
+        <ProductListJsonLd products={data.products} />
+      ) : null}
     </div>
   );
 }
