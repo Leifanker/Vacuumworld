@@ -207,30 +207,45 @@ export default function ReviewPost({ data }: any) {
           </section>
         )}
 
-        {/* COMPARISONS & ALTERNATIVES */}
-        {(data.comparisons?.vs_competitors?.length || data.comparisons?.alternatives?.length) && (
-          <Card className="p-5">
-            <h2 className="text-xl font-semibold mb-2">Comparisons & Alternatives</h2>
-            <div className="space-y-3 text-sm">
-              {(data.comparisons?.vs_competitors || []).map((v: any, i: number) => (
-                <div key={i}>
-                  <strong>{v.competitor}:</strong> {v.claim_or_question} — <em>{v.result}</em>{" "}
-                  {v.link && <a className="underline text-violet-700" href={v.link}>Learn more</a>}
+        {/* Comparisons & Alternatives */}
+{(data.comparisons?.vs_competitors?.length || data.comparisons?.alternatives?.length) && (
+  <Card id="comparisons" className="p-5">
+    <h2 className="text-xl font-semibold mb-2">Comparisons & Alternatives</h2>
+
+    {/* vs competitors (keep text) */}
+    <div className="space-y-3 text-sm mb-4">
+      {(data.comparisons?.vs_competitors || []).map((v: any, i: number) => (
+        <div key={i}>
+          <strong>{v.competitor}:</strong> {v.claim_or_question} — <em>{v.result}</em>{" "}
+          {v.link && <a className="underline text-violet-700" href={v.link}>Learn more</a>}
+        </div>
+      ))}
+    </div>
+
+    {/* alternatives as cards */}
+    {Array.isArray(data.comparisons?.alternatives) && data.comparisons.alternatives.length > 0 && (
+      <div className="grid md:grid-cols-2 gap-4">
+        {data.comparisons.alternatives.map((a: any, i: number) => (
+          <div key={i} className="rounded-2xl border border-gray-200 p-4 flex gap-3 bg-white">
+            {a.image_url && (
+              <img src={a.image_url} alt={a.name} loading="lazy" className="w-24 h-24 rounded-xl border object-cover" />
+            )}
+            <div className="min-w-0">
+              <div className="font-semibold">{a.name}</div>
+              <p className="text-sm text-slate-700">{a.reason}</p>
+              {a.url && (
+                <div className="mt-2">
+                  <BrandButton href={a.url}>See price</BrandButton>
                 </div>
-              ))}
-              {(data.comparisons?.alternatives || []).map((a: any, i: number) => (
-                <div key={i}>
-                  <strong>{a.name}:</strong> {a.reason}{" "}
-                  {a.url && (
-                    <a className="underline text-violet-700" href={a.url} target="_blank" rel="nofollow sponsored noopener noreferrer">
-                      See price
-                    </a>
-                  )}
-                </div>
-              ))}
+              )}
             </div>
-          </Card>
-        )}
+          </div>
+        ))}
+      </div>
+    )}
+  </Card>
+)}
+
 
         {/* OBJECTIONS & RISK */}
         {data.objections_and_risks?.items?.length > 0 && (
