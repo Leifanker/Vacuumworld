@@ -213,60 +213,89 @@ export default function AffiliatePost({ data = {} as any }) {
         )}
 
         {/* Products */}
-        {Array.isArray(data.products) && data.products.length > 0 && (
-          <section id="products" className="scroll-mt-24 py-6">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4">Top Picks Explained</h2>
-            <div className="space-y-6">
-              {data.products.map((p: any) => (
-                <Card key={p.id}>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-semibold">{p.name}</h3>
-                    <p className="text-gray-700">{p.summary_value_prop}</p>
-                    <div className="grid sm:grid-cols-3 gap-4">
-                      <div>
-                        <div className="font-medium mb-1">Key specs</div>
-                        <ul className="text-sm list-disc pl-5">
-                          {(p.key_specs || []).map((s: any, i: number) => (
-                            <li key={i}>{s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="font-medium mb-1">Pros</div>
-                        <ul className="text-sm list-disc pl-5">
-                          {(p.pros || []).map((s: any, i: number) => (
-                            <li key={i}>{s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="font-medium mb-1">Cons</div>
-                        <ul className="text-sm list-disc pl-5">
-                          {(p.cons || []).map((s: any, i: number) => (
-                            <li key={i}>{s}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-gray-600">
-                      {p.rating && <span>⭐ {p.rating} ({p.review_count || 0} reviews)</span>}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {p.price_display && <Badge>${p.price_display}</Badge>}
-                      {p.coupon_text && <Badge>{p.coupon_text}</Badge>}
-                    </div>
-                    <div className="pt-1">
-                      <Button href={p.affiliate_url}>{ux?.button_label_default || "Check price"}</Button>
-                    </div>
-                    {compliance?.pricing_disclaimer_text && (
-                      <div className="text-xs text-gray-500">{compliance.pricing_disclaimer_text}</div>
-                    )}
-                  </div>
-                </Card>
-              ))}
+{Array.isArray(data.products) && data.products.length > 0 && (
+  <section id="products" className="scroll-mt-24 py-6">
+    <h2 className="text-2xl md:text-3xl font-semibold mb-4">Top Picks Explained</h2>
+    <div className="space-y-6">
+      {data.products.map((p: any) => (
+        <Card key={p.id}>
+          <div className="grid md:grid-cols-[180px,1fr] gap-4 items-start">
+            {/* NEW: product image */}
+            {p.image_url ? (
+              <a
+                href={p.affiliate_url}
+                target="_blank"
+                rel="nofollow sponsored noopener noreferrer"
+                className="block"
+              >
+                <img
+                  src={p.image_url}
+                  alt={`${p.name} product image`}
+                  loading={ux?.lazy_load_images ? "lazy" : undefined}
+                  className="w-full h-44 md:h-40 object-cover rounded-xl border"
+                />
+              </a>
+            ) : (
+              <div className="hidden md:block rounded-xl border bg-gray-50 h-40" />
+            )}
+
+            {/* details */}
+            <div className="space-y-3">
+              <h3 className="text-xl font-semibold">{p.name}</h3>
+              <p className="text-gray-700">{p.summary_value_prop}</p>
+
+              <div className="grid sm:grid-cols-3 gap-4">
+                <div>
+                  <div className="font-medium mb-1">Key specs</div>
+                  <ul className="text-sm list-disc pl-5">
+                    {(p.key_specs || []).map((s: any, i: number) => <li key={i}>{s}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <div className="font-medium mb-1">Pros</div>
+                  <ul className="text-sm list-disc pl-5">
+                    {(p.pros || []).map((s: any, i: number) => <li key={i}>{s}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <div className="font-medium mb-1">Cons</div>
+                  <ul className="text-sm list-disc pl-5">
+                    {(p.cons || []).map((s: any, i: number) => <li key={i}>{s}</li>)}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                {p.rating && <span>⭐ {p.rating} ({p.review_count || 0} reviews)</span>}
+              </div>
+
+              <div className="flex items-center gap-3">
+                {p.price_display && <span className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-gray-100 border border-gray-200">${p.price_display}</span>}
+                {p.coupon_text && <span className="inline-block text-xs font-medium px-2 py-1 rounded-full bg-gray-100 border border-gray-200">{p.coupon_text}</span>}
+              </div>
+
+              <div className="pt-1">
+                <a
+                  href={p.affiliate_url}
+                  target="_blank"
+                  rel="nofollow sponsored noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 rounded-2xl shadow-sm border border-gray-300 hover:shadow-md active:scale-[.99] transition text-sm md:text-base"
+                >
+                  {ux?.button_label_default || "Check price"}
+                </a>
+              </div>
+
+              {compliance?.pricing_disclaimer_text && (
+                <div className="text-xs text-gray-500">{compliance.pricing_disclaimer_text}</div>
+              )}
             </div>
-          </section>
-        )}
+          </div>
+        </Card>
+      ))}
+    </div>
+  </section>
+)}
+
 
         {/* Comparison Table */}
         {comparison_table?.enabled && Array.isArray(data.products) && data.products.length > 0 && (
