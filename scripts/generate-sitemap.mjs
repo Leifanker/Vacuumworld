@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const SITE = "https://www.vacuumworld.net";
+const SITE = "https://vacume-vacuum-packag-032y.bolt.host";
 const PUBLIC_DIR = path.resolve("public");
 const AFF_DIR = path.join(PUBLIC_DIR, "affposts");
 const OUT = path.join(PUBLIC_DIR, "sitemap.xml");

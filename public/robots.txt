@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.vacuumworld.net/sitemap.xml
+Sitemap: https://vacume-vacuum-packag-032y.bolt.host/sitemap.xml
