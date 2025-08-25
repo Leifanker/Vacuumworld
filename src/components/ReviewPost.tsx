@@ -187,11 +187,11 @@ export default function ReviewPost({ data }: any) {
                 {b.how_to_tip && <div className="text-sm mt-2"><strong>Tip:</strong> {b.how_to_tip}</div>}
               </Card>
             ))}
-          </section>
-      <div className="mt-3">
+            <div className="mt-3">
   <BrandButton href={v?.primary_cta?.url || p.affiliate_url}>Check current price</BrandButton>
 </div>
 
+          </section>
         )}
 
         {/* PROS & CONS */}
