@@ -109,11 +109,18 @@ export default function ReviewPost({ data }: any) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50/40 via-purple-50/40 to-yellow-50/40 dark:from-gray-900 dark:via-purple-900/10 dark:to-pink-900/10">
       {/* HERO */}
-      <header className="relative">
+      <header className="relative pt-0">
         <div className="h-64 md:h-80 w-full relative overflow-hidden">
           {heroImg ? (
             <>
-              <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <img 
+                src={heroImg} 
+                alt={`${p.name} product review`} 
+                className="absolute inset-0 w-full h-full object-cover"
+                width="1200"
+                height="600"
+                loading="eager"
+              />
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500/60 to-purple-600/60" />
             </>
           ) : (

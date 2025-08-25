@@ -129,11 +129,18 @@ export default function AffiliatePost({ data = {} as any }) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-violet-50/40 to-white">
       {/* HERO HEADER */}
-      <header className="relative">
+      <header className="relative pt-0">
         <div className="h-44 md:h-64 w-full relative overflow-hidden">
           {heroImg ? (
             <>
-              <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              <img 
+                src={heroImg} 
+                alt={seo?.meta_title_template || "Affiliate post"} 
+                className="absolute inset-0 w-full h-full object-cover"
+                width="1200"
+                height="600"
+                loading="eager"
+              />
               <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-500/60 to-violet-600/60" />
             </>
           ) : (

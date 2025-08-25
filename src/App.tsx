@@ -74,6 +74,23 @@ function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="VacuumWorld - Vacuum Packaging Solutions" />
         <meta name="twitter:description" content="Expert recommendations for vacuum packaging solutions that preserve food freshness and optimize storage space." />
+        
+        {/* Organization Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "VacuumWorld",
+            "url": "https://www.vacuumworld.net",
+            "logo": "https://www.vacuumworld.net/logo.png",
+            "description": "Expert recommendations for vacuum packaging solutions that preserve food freshness and optimize storage space.",
+            "sameAs": [
+              "https://www.youtube.com/@vacuumworld",
+              "https://www.pinterest.com/vacuumworld",
+              "https://twitter.com/vacuumworld"
+            ]
+          })}
+        </script>
       </Helmet>
       
       <Header 
