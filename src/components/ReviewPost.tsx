@@ -1,6 +1,6 @@
-// src/components/ReviewPost.tsx
 import React from "react";
 import BrandButton from "@/components/ui/BrandButton";
+import ReviewTOC from "@/components/ui/ReviewTOC";
 import StickyMobileCTA from "@/components/ui/StickyMobileCTA";
 
 const Card = ({ children, className = "" }: any) => (
@@ -38,7 +38,13 @@ const ProductJsonLd = ({ product, review }: any) => {
     image: product.images?.[0] || product.image_url,
     description: product.summary_value_prop,
     offers: product.affiliate_url
-      ? { "@type": "Offer", url: product.affiliate_url, price: product.price_display, priceCurrency: product.currency || "USD" }
+      ? {
+          "@type": "Offer",
+          url: product.affiliate_url,
+          price: product.price_display,
+          priceCurrency: product.currency || "USD",
+          availability: "https://schema.org/InStock"
+        }
       : undefined,
   };
   if (review) {
@@ -92,13 +98,15 @@ export default function ReviewPost({ data }: any) {
                 {(data.ctas?.intro?.text || v?.primary_cta?.text || "See price")}
               </BrandButton>
             </div>
+            {/* Mini TOC */}
+            <ReviewTOC />
           </Card>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-4 md:px-6 py-8 space-y-8">
         {/* QUICK VERDICT */}
-        <Card className="p-5">
+        <Card id="quick-verdict" className="p-5">
           <div className="flex flex-wrap items-start gap-4">
             <div className="grow">
               <div className="text-lg font-semibold mb-1">Quick verdict</div>
@@ -116,7 +124,6 @@ export default function ReviewPost({ data }: any) {
               </div>
             </div>
 
-            {/* product thumbnail */}
             {(p.images?.[0] || p.image_url) && (
               <div className="shrink-0">
                 <a href={v.primary_cta?.url || p.affiliate_url} target="_blank" rel="nofollow sponsored noopener noreferrer">
@@ -134,11 +141,10 @@ export default function ReviewPost({ data }: any) {
 
         {/* HOW WE TESTED */}
         {data.proof_of_testing?.how_we_tested && (
-          <Card className="p-5">
+          <Card id="how-we-tested" className="p-5">
             <h2 className="text-xl font-semibold mb-2">How we tested</h2>
             <p className="text-slate-800">{data.proof_of_testing.how_we_tested}</p>
 
-            {/* photos gallery */}
             {Array.isArray(data.proof_of_testing?.photos) && data.proof_of_testing.photos.length > 0 && (
               <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
                 {data.proof_of_testing.photos.map((url: string, i: number) => (
@@ -154,7 +160,6 @@ export default function ReviewPost({ data }: any) {
               </div>
             )}
 
-            {/* optional video */}
             {data.proof_of_testing?.video_url && (
               <div className="mt-4 aspect-video rounded-2xl overflow-hidden border">
                 <video src={data.proof_of_testing.video_url} controls className="w-full h-full" />
@@ -165,7 +170,7 @@ export default function ReviewPost({ data }: any) {
 
         {/* BENEFITS */}
         {Array.isArray(data.benefits) && data.benefits.length > 0 && (
-          <section className="space-y-4">
+          <section id="benefits" className="space-y-4">
             <h2 className="text-xl font-semibold">Benefits (with evidence)</h2>
             {data.benefits.map((b: any, i: number) => (
               <Card key={i} className="p-5">
@@ -188,15 +193,14 @@ export default function ReviewPost({ data }: any) {
               </Card>
             ))}
             <div className="mt-3">
-  <BrandButton href={v?.primary_cta?.url || p.affiliate_url}>Check current price</BrandButton>
-</div>
-
+              <BrandButton href={v?.primary_cta?.url || p.affiliate_url}>Check current price</BrandButton>
+            </div>
           </section>
         )}
 
         {/* PROS & CONS */}
         {(data.pros_cons?.pros?.length || data.pros_cons?.cons?.length) && (
-          <section>
+          <section id="pros-cons">
             <h2 className="text-xl font-semibold mb-2">Pros & Cons</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="p-5">
@@ -211,49 +215,46 @@ export default function ReviewPost({ data }: any) {
           </section>
         )}
 
-        {/* Comparisons & Alternatives */}
-{(data.comparisons?.vs_competitors?.length || data.comparisons?.alternatives?.length) && (
-  <Card id="comparisons" className="p-5">
-    <h2 className="text-xl font-semibold mb-2">Comparisons & Alternatives</h2>
+        {/* COMPARISONS & ALTERNATIVES */}
+        {(data.comparisons?.vs_competitors?.length || data.comparisons?.alternatives?.length) && (
+          <Card id="comparisons" className="p-5">
+            <h2 className="text-xl font-semibold mb-2">Comparisons & Alternatives</h2>
 
-    {/* vs competitors (keep text) */}
-    <div className="space-y-3 text-sm mb-4">
-      {(data.comparisons?.vs_competitors || []).map((v: any, i: number) => (
-        <div key={i}>
-          <strong>{v.competitor}:</strong> {v.claim_or_question} — <em>{v.result}</em>{" "}
-          {v.link && <a className="underline text-violet-700" href={v.link}>Learn more</a>}
-        </div>
-      ))}
-    </div>
-
-    {/* alternatives as cards */}
-    {Array.isArray(data.comparisons?.alternatives) && data.comparisons.alternatives.length > 0 && (
-      <div className="grid md:grid-cols-2 gap-4">
-        {data.comparisons.alternatives.map((a: any, i: number) => (
-          <div key={i} className="rounded-2xl border border-gray-200 p-4 flex gap-3 bg-white">
-            {a.image_url && (
-              <img src={a.image_url} alt={a.name} loading="lazy" className="w-24 h-24 rounded-xl border object-cover" />
-            )}
-            <div className="min-w-0">
-              <div className="font-semibold">{a.name}</div>
-              <p className="text-sm text-slate-700">{a.reason}</p>
-              {a.url && (
-                <div className="mt-2">
-                  <BrandButton href={a.url}>See price</BrandButton>
+            <div className="space-y-3 text-sm mb-4">
+              {(data.comparisons?.vs_competitors || []).map((v: any, i: number) => (
+                <div key={i}>
+                  <strong>{v.competitor}:</strong> {v.claim_or_question} — <em>{v.result}</em>{" "}
+                  {v.link && <a className="underline text-violet-700" href={v.link}>Learn more</a>}
                 </div>
-              )}
+              ))}
             </div>
-          </div>
-        ))}
-      </div>
-    )}
-  </Card>
-)}
 
+            {Array.isArray(data.comparisons?.alternatives) && data.comparisons.alternatives.length > 0 && (
+              <div className="grid md:grid-cols-2 gap-4">
+                {data.comparisons.alternatives.map((a: any, i: number) => (
+                  <div key={i} className="rounded-2xl border border-gray-200 p-4 flex gap-3 bg-white">
+                    {a.image_url && (
+                      <img src={a.image_url} alt={a.name} loading="lazy" className="w-24 h-24 rounded-xl border object-cover" />
+                    )}
+                    <div className="min-w-0">
+                      <div className="font-semibold">{a.name}</div>
+                      <p className="text-sm text-slate-700">{a.reason}</p>
+                      {a.url && (
+                        <div className="mt-2">
+                          <BrandButton href={a.url}>See price</BrandButton>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+        )}
 
         {/* OBJECTIONS & RISK */}
         {data.objections_and_risks?.items?.length > 0 && (
-          <Card className="p-5">
+          <Card id="objections" className="p-5">
             <h2 className="text-xl font-semibold mb-2">Objections & Risk</h2>
             <ul className="list-disc pl-5 text-sm">
               {data.objections_and_risks.items.map((x: any, i: number) => (
@@ -281,7 +282,7 @@ export default function ReviewPost({ data }: any) {
 
         {/* FAQ */}
         {faq?.length > 0 && (
-          <Card className="p-5">
+          <Card id="faq" className="p-5">
             <h2 className="text-xl font-semibold mb-2">FAQ</h2>
             <div className="divide-y">
               {faq.map((x: any, i: number) => (
@@ -295,7 +296,7 @@ export default function ReviewPost({ data }: any) {
         )}
 
         {/* FINAL VERDICT */}
-        <Card className="p-5">
+        <Card id="final-verdict" className="p-5">
           <h2 className="text-xl font-semibold mb-2">Final verdict</h2>
           <p className="text-slate-800">{data.final_verdict?.summary}</p>
           <div className="mt-3">
@@ -307,12 +308,10 @@ export default function ReviewPost({ data }: any) {
             <div className="text-xs text-slate-500 mt-2">{data.compliance.pricing_disclaimer_text}</div>
           )}
         </Card>
-        import ReviewTOC from "@/components/ui/ReviewTOC";
-// after the hero Card
-<ReviewTOC />
-
-        <StickyMobileCTA label={p.name} price={p.price_display} href={v?.primary_cta?.url || p.affiliate_url} />
       </main>
+
+      {/* Sticky mobile CTA */}
+      <StickyMobileCTA label={p.name} price={p.price_display} href={v?.primary_cta?.url || p.affiliate_url} />
 
       {/* JSON-LD */}
       {data.schema_settings?.enable_faq_schema ? <FaqJsonLd items={faq} /> : null}
