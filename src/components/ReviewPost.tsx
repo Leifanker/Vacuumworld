@@ -1,5 +1,6 @@
 // src/components/ReviewPost.tsx
 import React from "react";
+import BrandButton from "@/components/ui/BrandButton";
 
 const Card = ({ children, className = "" }: any) => (
   <div className={`rounded-3xl border border-violet-200/60 bg-white shadow-sm ${className}`}>{children}</div>
@@ -11,17 +12,9 @@ const Pill = ({ children }: any) => (
   </span>
 );
 
-const BrandButton = ({ href, children }: any) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="nofollow sponsored noopener noreferrer"
-    className="inline-flex items-center justify-center px-5 py-2 rounded-full text-white shadow-sm hover:shadow-md active:scale-[.99] transition
-               bg-gradient-to-r from-fuchsia-500 to-violet-600"
-  >
-    {children}
-  </a>
-);
+<BrandButton href={(data.ctas?.intro?.url || v?.primary_cta?.url || p.affiliate_url)}>
+  {(data.ctas?.intro?.text || v?.primary_cta?.text || "See price")}
+</BrandButton>
 
 // JSON-LD helpers
 const FaqJsonLd = ({ items }: { items: { q: string; a: string }[] }) => {
