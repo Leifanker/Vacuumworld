@@ -45,7 +45,7 @@ const ProductJsonLd = ({ product, review }: any) => {
     "@type": "Product",
     name: product.name,
     brand: product.brand,
-    image: product.images?.[0],
+    image: product.images?.[0] || product.image_url,
     description: product.summary_value_prop,
     offers: product.affiliate_url
       ? { "@type": "Offer", url: product.affiliate_url, price: product.price_display, priceCurrency: product.currency || "USD" }
@@ -69,7 +69,7 @@ export default function ReviewPost({ data }: any) {
   const faq = data.faq || [];
   const schemaMeta = data.schema_settings?.review_schema_metadata;
 
-  const heroImg = data.seo?.og_image_url || p.images?.[0];
+  const heroImg = data.seo?.og_image_url || p.images?.[0] || p.image_url;
   const title = data.seo?.meta_title_template || `${p.name} Review: Is It Worth It?`;
   const subtitle = data.seo?.meta_description_template;
 
@@ -125,11 +125,20 @@ export default function ReviewPost({ data }: any) {
                 {Array.isArray(v.not_for) && v.not_for.length > 0 && <div><strong>Not for:</strong> {v.not_for.join(", ")}</div>}
               </div>
             </div>
-            <div className="shrink-0">
-              <BrandButton href={(v.primary_cta && v.primary_cta.url) || p.affiliate_url}>
-                {(v.primary_cta && v.primary_cta.text) || "See price on Amazon"}
-              </BrandButton>
-            </div>
+
+            {/* product thumbnail */}
+            {(p.images?.[0] || p.image_url) && (
+              <div className="shrink-0">
+                <a href={v.primary_cta?.url || p.affiliate_url} target="_blank" rel="nofollow sponsored noopener noreferrer">
+                  <img
+                    src={p.images?.[0] || p.image_url}
+                    alt={`${p.name} product photo`}
+                    loading="lazy"
+                    className="w-32 h-32 md:w-40 md:h-40 rounded-2xl border object-cover"
+                  />
+                </a>
+              </div>
+            )}
           </div>
         </Card>
 
@@ -138,6 +147,29 @@ export default function ReviewPost({ data }: any) {
           <Card className="p-5">
             <h2 className="text-xl font-semibold mb-2">How we tested</h2>
             <p className="text-slate-800">{data.proof_of_testing.how_we_tested}</p>
+
+            {/* photos gallery */}
+            {Array.isArray(data.proof_of_testing?.photos) && data.proof_of_testing.photos.length > 0 && (
+              <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
+                {data.proof_of_testing.photos.map((url: string, i: number) => (
+                  <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={url}
+                      alt={`Testing photo ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-40 md:h-48 object-cover rounded-2xl border"
+                    />
+                  </a>
+                ))}
+              </div>
+            )}
+
+            {/* optional video */}
+            {data.proof_of_testing?.video_url && (
+              <div className="mt-4 aspect-video rounded-2xl overflow-hidden border">
+                <video src={data.proof_of_testing.video_url} controls className="w-full h-full" />
+              </div>
+            )}
           </Card>
         )}
 
@@ -147,6 +179,14 @@ export default function ReviewPost({ data }: any) {
             <h2 className="text-xl font-semibold">Benefits (with evidence)</h2>
             {data.benefits.map((b: any, i: number) => (
               <Card key={i} className="p-5">
+                {b.image_url && (
+                  <img
+                    src={b.image_url}
+                    alt={b.title}
+                    loading="lazy"
+                    className="w-full h-44 md:h-56 object-cover rounded-2xl border mb-3"
+                  />
+                )}
                 <div className="text-lg font-semibold">{b.title}</div>
                 <p className="text-slate-800">{b.use_case}</p>
                 {b.evidence && (
