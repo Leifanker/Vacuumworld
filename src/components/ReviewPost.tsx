@@ -175,6 +175,10 @@ export default function ReviewPost({ data }: any) {
                     alt={b.title}
                     loading="lazy"
                     className="w-full h-44 md:h-56 object-cover rounded-2xl border mb-3"
+                    <div className="mt-3">
+  <BrandButton href={v?.primary_cta?.url || p.affiliate_url}>Check current price</BrandButton>
+</div>
+
                   />
                 )}
                 <div className="text-lg font-semibold">{b.title}</div>
