@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AffiliatePost from '../components/AffiliatePost';
 import ReviewPost from '../components/ReviewPost';
+import EducationalPost from '../components/EducationalPost';
 
 const BlogPostRoute: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -124,6 +125,7 @@ const BlogPostRoute: React.FC = () => {
 
   // Determine if this is a review post or regular affiliate post
   const isReview = String(affiliateData?.template || "").toLowerCase() === "review";
+  const isEducational = String(affiliateData?.template || "").toLowerCase() === "educational";
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -150,6 +152,8 @@ const BlogPostRoute: React.FC = () => {
       {/* Render the appropriate post component */}
       {isReview ? (
         <ReviewPost data={affiliateData} />
+      ) : isEducational ? (
+        <EducationalPost data={affiliateData} />
       ) : (
         <AffiliatePost data={affiliateData} />
       )}

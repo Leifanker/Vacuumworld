@@ -118,6 +118,10 @@ function determineCategory(data: any): 'tips' | 'reviews' | 'guides' | 'news' {
     return 'reviews';
   }
   
+  if (data.template === 'educational' || data.post_type === 'educational') {
+    return 'guides';
+  }
+  
   if (data.products?.length > 0) {
     return 'reviews';
   }
