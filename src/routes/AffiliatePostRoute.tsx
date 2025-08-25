@@ -116,9 +116,9 @@ export default function AffiliatePostRoute() {
         <Helmet>
           <title>Debug: {seoTitle}</title>
         </Helmet>
-      <pre style={{ padding: 24, whiteSpace: "pre-wrap" }}>
-        {JSON.stringify(data, null, 2)}
-      </pre>
+        <pre style={{ padding: 24, whiteSpace: "pre-wrap" }}>
+          {JSON.stringify(data, null, 2)}
+        </pre>
       </>
     );
   }
@@ -186,12 +186,12 @@ export default function AffiliatePostRoute() {
             experience="Tested 50+ vacuum sealers and storage solutions for home cooks and professionals"
           />
         </div>
-    </>
-  );
-}
 
         {/* Internal Links */}
         <div className="max-w-6xl mx-auto px-4 md:px-6 pb-12">
           <InternalLinks links={internalLinks} />
         </div>
       </div>
+    </>
+  );
+}
