@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft } from 'lucide-react';
 import { fetchAffiliateBySlug } from '../utils/affiliateLoader';
 import Header from '../components/Header';
@@ -77,6 +78,9 @@ const BlogPostRoute: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
+        <Helmet>
+          <title>Loading... - VacuumWorld</title>
+        </Helmet>
         <Header 
           isDark={isDark} 
           toggleDark={toggleDark}
@@ -95,6 +99,10 @@ const BlogPostRoute: React.FC = () => {
   if (error || !affiliateData) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900">
+        <Helmet>
+          <title>Article Not Found - VacuumWorld</title>
+          <meta name="description" content="The article you're looking for doesn't exist." />
+        </Helmet>
         <Header 
           isDark={isDark} 
           toggleDark={toggleDark}
@@ -126,9 +134,43 @@ const BlogPostRoute: React.FC = () => {
   // Determine if this is a review post or regular affiliate post
   const isReview = String(affiliateData?.template || "").toLowerCase() === "review";
   const isEducational = String(affiliateData?.template || "").toLowerCase() === "educational";
+  
+  // Generate SEO data
+  const seoTitle = affiliateData?.seo?.meta_title_template || affiliateData?.product?.name || affiliateData?.metadata?.title || "VacuumWorld";
+  const seoDescription = affiliateData?.seo?.meta_description_template || affiliateData?.metadata?.meta_description || "";
+  const canonicalUrl = `https://www.vacuumworld.net/blog/${slug}`;
+  const ogTitle = affiliateData?.seo?.og_title_template || seoTitle;
+  const ogDescription = affiliateData?.seo?.og_description_template || seoDescription;
+  const ogImage = affiliateData?.seo?.og_image_url || affiliateData?.product?.images?.[0] || affiliateData?.product?.image_url || affiliateData?.metadata?.featured_image?.src;
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:site_name" content="VacuumWorld" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={ogTitle} />
+        <meta name="twitter:description" content={ogDescription} />
+        {ogImage && <meta name="twitter:image" content={ogImage} />}
+        
+        {/* Article specific */}
+        {affiliateData?.metadata?.author && <meta name="author" content={affiliateData.metadata.author} />}
+        {affiliateData?.metadata?.publish_date && <meta property="article:published_time" content={affiliateData.metadata.publish_date} />}
+        {affiliateData?.metadata?.last_updated && <meta property="article:modified_time" content={affiliateData.metadata.last_updated} />}
+        {affiliateData?.seo?.primary_keyword && <meta name="keywords" content={affiliateData.seo.primary_keyword} />}
+      </Helmet>
+      
       <Header 
         isDark={isDark} 
         toggleDark={toggleDark}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
@@ -57,6 +58,24 @@ function App() {
 
   const HomePage = () => (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      <Helmet>
+        <title>VacuumWorld - Vacuum Packaging Solutions & Product Recommendations</title>
+        <meta name="description" content="Discover the best vacuum packaging solutions for food preservation and clothing storage at VacuumWorld. Expert recommendations and reviews of top-rated vacuum sealers and storage products." />
+        <link rel="canonical" href="https://www.vacuumworld.net/" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="VacuumWorld - Vacuum Packaging Solutions" />
+        <meta property="og:description" content="Expert recommendations for vacuum packaging solutions that preserve food freshness and optimize storage space." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.vacuumworld.net/" />
+        <meta property="og:site_name" content="VacuumWorld" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VacuumWorld - Vacuum Packaging Solutions" />
+        <meta name="twitter:description" content="Expert recommendations for vacuum packaging solutions that preserve food freshness and optimize storage space." />
+      </Helmet>
+      
       <Header 
         isDark={isDark} 
         toggleDark={toggleDark}
@@ -78,12 +97,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* Simple header (optional) */}
-      <div style={{ padding: 12, borderBottom: "1px solid #eee" }}>
-        <Link to="/">Home</Link>{" "}
-        | <Link to="/posts">Posts</Link>
-      </div>
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/posts" element={<AffiliateIndexRoute />} />
