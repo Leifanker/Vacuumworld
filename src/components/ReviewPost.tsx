@@ -288,6 +288,10 @@ export default function ReviewPost({ data }: any) {
             <div className="text-xs text-slate-500 mt-2">{data.compliance.pricing_disclaimer_text}</div>
           )}
         </Card>
+        import ReviewTOC from "@/components/ui/ReviewTOC";
+// after the hero Card
+<ReviewTOC />
+
         <StickyMobileCTA label={p.name} price={p.price_display} href={v?.primary_cta?.url || p.affiliate_url} />
       </main>
 
