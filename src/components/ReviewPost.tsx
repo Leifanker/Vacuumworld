@@ -12,10 +12,6 @@ const Pill = ({ children }: any) => (
   </span>
 );
 
-<BrandButton href={(data.ctas?.intro?.url || v?.primary_cta?.url || p.affiliate_url)}>
-  {(data.ctas?.intro?.text || v?.primary_cta?.text || "See price")}
-</BrandButton>
-
 // JSON-LD helpers
 const FaqJsonLd = ({ items }: { items: { q: string; a: string }[] }) => {
   if (!items?.length) return null;
