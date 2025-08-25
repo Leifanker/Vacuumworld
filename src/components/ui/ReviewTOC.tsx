@@ -1,5 +1,7 @@
+import React from "react";
+
 export default function ReviewTOC() {
-  const items = [
+  const items: Array<[string, string]> = [
     ["quick-verdict", "Quick verdict"],
     ["how-we-tested", "How we tested"],
     ["benefits", "Benefits"],
@@ -9,6 +11,7 @@ export default function ReviewTOC() {
     ["faq", "FAQ"],
     ["final-verdict", "Final verdict"],
   ];
+
   return (
     <nav className="mt-4 flex flex-wrap gap-2">
       {items.map(([id, label]) => (
