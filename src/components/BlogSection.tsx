@@ -1,12 +1,32 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, User, Tag, ArrowRight, Search, Filter } from 'lucide-react';
-import { blogPosts, blogCategories, featuredPosts } from '../utils/blogData';
+import { getBlogPosts, blogCategories } from '../utils/blogData';
 import { BlogPost } from '../types';
 
 const BlogSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load blog posts on component mount
+  React.useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const posts = await getBlogPosts();
+        setBlogPosts(posts);
+        setFeaturedPosts(posts.filter(post => post.featured));
+        setLoading(false);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+        setLoading(false);
+      }
+    };
+    
+    loadPosts();
+  }, []);
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
@@ -80,11 +100,16 @@ const BlogSection: React.FC = () => {
             {/* Article Content */}
             <div 
               className="prose prose-lg dark:prose-invert max-w-none"
-              dangerouslySetInnerHTML={{ 
-                __html: selectedPost.content.replace(/\n/g, '<br>').replace(/#{1,6}\s/g, match => {
-                  const level = match.trim().length;
-                  return `<h${level} class="text-${4-level}xl font-bold mt-8 mb-4">`;
-                }).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+              dangerouslySetInnerHTML={{
+                __html: selectedPost.content
+                  .replace(/\n\n/g, '</p><p>')
+                  .replace(/^/, '<p>')
+                  .replace(/$/, '</p>')
+                  .replace(/## (.*?)\n/g, '<h2 class="text-2xl font-bold mt-8 mb-4">$1</h2>')
+                  .replace(/### (.*?)\n/g, '<h3 class="text-xl font-bold mt-6 mb-3">$1</h3>')
+                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                  .replace(/- (.*?)\n/g, '<li>$1</li>')
+                  .replace(/(<li>.*<\/li>)/s, '<ul class="list-disc pl-5 mb-4">$1</ul>')
               }}
             />
           </article>
@@ -125,6 +150,19 @@ const BlogSection: React.FC = () => {
                   </div>
                 ))}
             </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <section id="blog" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-300">Loading articles...</p>
           </div>
         </div>
       </section>
