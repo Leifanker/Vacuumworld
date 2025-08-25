@@ -1,6 +1,7 @@
 // src/components/ReviewPost.tsx
 import React from "react";
 import BrandButton from "@/components/ui/BrandButton";
+import StickyMobileCTA from "@/components/ui/StickyMobileCTA";
 
 const Card = ({ children, className = "" }: any) => (
   <div className={`rounded-3xl border border-violet-200/60 bg-white shadow-sm ${className}`}>{children}</div>
@@ -287,6 +288,7 @@ export default function ReviewPost({ data }: any) {
             <div className="text-xs text-slate-500 mt-2">{data.compliance.pricing_disclaimer_text}</div>
           )}
         </Card>
+        <StickyMobileCTA label={p.name} price={p.price_display} href={v?.primary_cta?.url || p.affiliate_url} />
       </main>
 
       {/* JSON-LD */}
