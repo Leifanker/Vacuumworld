@@ -9,6 +9,7 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AffiliatePostRoute from "@/routes/AffiliatePostRoute";
 import AffiliateIndexRoute from "@/routes/AffiliateIndexRoute";
+import BlogPostRoute from "@/routes/BlogPostRoute";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -87,6 +88,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/posts" element={<AffiliateIndexRoute />} />
         <Route path="/posts/:slug" element={<AffiliatePostRoute />} />
+        <Route path="/blog/:slug" element={<BlogPostRoute />} />
         {/* fallback */}
         <Route path="*" element={<div style={{ padding: 24 }}>Not found</div>} />
       </Routes>

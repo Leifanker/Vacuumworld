@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, User, Tag, ArrowRight, Search, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getBlogPosts, blogCategories } from '../utils/blogData';
 import { BlogPost } from '../types';
 
@@ -125,10 +126,10 @@ const BlogSection: React.FC = () => {
                        post.tags.some(tag => selectedPost.tags.includes(tag)))
                 .slice(0, 2)
                 .map((post) => (
-                  <div
+                  <Link
                     key={post.id}
-                    onClick={() => setSelectedPost(post)}
-                    className="group cursor-pointer bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300"
+                    to={`/blog/${post.slug}`}
+                    className="group cursor-pointer bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 block"
                   >
                     <img
                       src={post.image}
@@ -147,7 +148,7 @@ const BlogSection: React.FC = () => {
                         <span>{post.readTime} min read</span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
@@ -194,10 +195,10 @@ const BlogSection: React.FC = () => {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Featured Articles</h3>
           <div className="grid lg:grid-cols-2 gap-8">
             {featuredPosts.map((post) => (
-              <div
+              <Link
                 key={post.id}
-                onClick={() => setSelectedPost(post)}
-                className="group cursor-pointer bg-gradient-to-r from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                to={`/blog/${post.slug}`}
+                className="group cursor-pointer bg-gradient-to-r from-pink-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 block"
               >
                 <img
                   src={post.image}
@@ -242,7 +243,7 @@ const BlogSection: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -284,10 +285,10 @@ const BlogSection: React.FC = () => {
         {/* Blog Posts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map((post, index) => (
-            <article
+            <Link
               key={post.id}
-              onClick={() => setSelectedPost(post)}
-              className="group cursor-pointer bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden"
+              to={`/blog/${post.slug}`}
+              className="group cursor-pointer bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 overflow-hidden block"
               style={{
                 animationDelay: `${index * 100}ms`
               }}
@@ -351,7 +352,7 @@ const BlogSection: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
