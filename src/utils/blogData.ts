@@ -5,6 +5,7 @@ import { fetchAffiliateIndex, fetchAffiliateBySlug } from './affiliateLoader';
 function convertAffiliatePostToBlogPost(slug: string, data: any): BlogPost {
   const seo = data.seo || {};
   const settings = data.settings || {};
+  const product = data.product || {};
   
   return {
     id: slug,
@@ -15,7 +16,7 @@ function convertAffiliatePostToBlogPost(slug: string, data: any): BlogPost {
     author: 'VacuumWorld Team',
     publishDate: new Date().toISOString().split('T')[0], // Use current date as fallback
     readTime: 5, // Default read time
-    image: seo.og_image_url || data.product?.image_url || data.products?.[0]?.image_url || 'https://images.pexels.com/photos/4792081/pexels-photo-4792081.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: seo.og_image_url || product.images?.[0] || product.image_url || data.products?.[0]?.image_url || 'https://images.pexels.com/photos/4792081/pexels-photo-4792081.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: extractTagsFromAffiliateData(data),
     category: determineCategory(data),
     featured: data.quick_picks?.length > 0 || false
