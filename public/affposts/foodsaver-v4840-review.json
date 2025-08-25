@@ -41,7 +41,9 @@
     "currency": "USD",
     "images": [
       "https://m.media-amazon.com/images/I/81aZcJHwLtL._AC_SX679_.jpg",
-      "https://m.media-amazon.com/images/I/81UnAgoof+L._AC_SX679_.jpg"
+      "https://m.media-amazon.com/images/I/81UnAgoof+L._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/81OjjwHAWUL._AC_SX679_.jpg",
+      "https://m.media-amazon.com/images/I/71Ax5pEwbKL._AC_SX679_.jpg"
       
     ],
     "key_specs": ["Dry/Moist modes", "Built-in cutter", "Accessory hose", "Auto bag detection"],
