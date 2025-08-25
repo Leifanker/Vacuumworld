@@ -19,9 +19,7 @@ export default function StickyMobileCTA({
       <div className="flex items-center gap-3 rounded-2xl shadow-lg border border-violet-200/60 bg-white px-3 py-2">
         <div className="min-w-0">
           <div className="truncate text-sm font-semibold">{label}</div>
-          {price && (
-            <div className="text-xs text-slate-600">~${price} on Amazon</div>
-          )}
+          {price && <div className="text-xs text-slate-600">~${price} on Amazon</div>}
         </div>
         <div className="ml-auto">
           <BrandButton href={href}>See price</BrandButton>
